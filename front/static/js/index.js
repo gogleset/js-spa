@@ -1,14 +1,13 @@
 import Dashboard from "./views/Dashboard.js";
-import NotFound from "./views/NotFound.js";
 import Setting from "./views/Setting.js";
 import Posts from "./views/Posts.js";
+import NotFound from "./views/NotFound.js";
 
 // 페이지 전환 함수
 const navigateTo = (url) => {
   history.pushState(null, null, url); //url 새로고침 없이 이동
   router();
 };
-console.log(Dashboard);
 /// 1.각 route의 경로와 현재 페이지 확인
 const router = async () => {
   const routes = [
@@ -23,12 +22,13 @@ const router = async () => {
       route: route,
       isMatch: location.pathname === route.path,
     };
-    // find 메서드를 사용해 isMatch가 true인 객체를 찾는다.
   });
+  // find 메서드를 사용해 isMatch가 true인 객체를 찾는다.
   let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch);
+  // match가 되지 않을때
   if (!match) {
     match = {
-      route: routes[0],
+      route: { path: "/404", view: NotFound },
       isMatch: true,
     };
   }
